@@ -28,46 +28,46 @@ function! lexima#template_rules#add_rules()
     call lexima#add_rule({
         \ 'char': '<',
         \ 'input_after': '>',
-        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako'],
+        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako', 'xml'],
         \ })
     call lexima#add_rule({
         \ 'char': '>',
         \ 'at': '\%#>',
         \ 'leave': 1,
-        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako'],
+        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako', 'xml'],
         \ })
     call lexima#add_rule({
         \ 'char': '<BS>',
         \ 'at': '<.*>\%#',
         \ 'input': '<BS>',
         \ 'input_after': '>',
-        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako'],
+        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako', 'xml'],
         \ })
     call lexima#add_rule({
         \ 'char': '<BS>',
         \ 'at': '<.*/>\%#',
         \ 'input': '<BS><BS>',
         \ 'input_after': '/>',
-        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako'],
+        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako', 'xml'],
         \ 'priority': 1,
         \ })
     call lexima#add_rule({
         \ 'char': '/',
         \ 'leave': 2,
         \ 'at': '^\s*<.*\%#\s*/>',
-        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako'],
+        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako', 'xml'],
         \ })
     call lexima#add_rule({
         \ 'char': '<BS>',
         \ 'delete': 1,
         \ 'at': '<\%#>',
-        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako'],
+        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako', 'xml'],
         \ })
     call lexima#add_rule({
         \ 'char': '<BS>',
         \ 'delete': 2,
         \ 'at': '<\%#/>',
-        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako'],
+        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako', 'xml'],
         \ 'priority': 1,
         \ })
     call lexima#add_rule({
@@ -75,7 +75,7 @@ function! lexima#template_rules#add_rules()
         \ 'delete': 1,
         \ 'input': '/>',
         \ 'at': '<[^>]\+\%#>',
-        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako'],
+        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako', 'xml'],
         \ })
     " }}}
 

@@ -50,6 +50,7 @@ let s:filetypes = [
     \ 'liquid',
     \ 'mako',
     \ 'twig',
+    \ 'xml',
     \ ]
 
 augroup lexima_template_rules
