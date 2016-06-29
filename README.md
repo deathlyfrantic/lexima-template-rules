@@ -11,7 +11,7 @@ Use your favorite plugin manager. I like [Vim-Plug](https://github.com/junegunn/
 
 In all cases below, `|` represents the cursor position.
 
-For all templates, including plain HTML:
+For all templates, including plain HTML and XML:
 
     Before                      Input                   After
     ----------------------------------------------------------------------------
@@ -24,6 +24,10 @@ For all templates, including plain HTML:
     <tag foo="bar"|>            /                       <tag foo="bar"/>|
     ----------------------------------------------------------------------------
     <tag|/>                     /                       <tag/>|
+    ----------------------------------------------------------------------------
+    <tag>|</tag>                <Enter>                 <tag>
+                                                            |
+                                                        </tag>
     ----------------------------------------------------------------------------
 
 For Django, Jinja2, Twig and Liquid templates (as appropriate):

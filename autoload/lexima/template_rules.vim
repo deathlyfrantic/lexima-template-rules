@@ -77,6 +77,13 @@ function! lexima#template_rules#add_rules()
         \ 'at': '<[^>]\+\%#>',
         \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako', 'xml'],
         \ })
+    call lexima#add_rule({
+        \ 'char': '<CR>',
+        \ 'input': '<CR>',
+        \ 'input_after': '<CR>',
+        \ 'at': '>\%#</',
+        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako', 'xml'],
+        \ })
     " }}}
 
     " jinja/django/liquid/twig templates {{{
