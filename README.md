@@ -1,7 +1,7 @@
 ## Lexima Rules for Web Templates
 
-[Lexima](https://github.com/cohama/lexima/) is great, but does not include any rules for web templates, so I wrote some.
-Then I figured other people might find them useful, so I pulled them out of my `init.vim` and here they are.
+[Lexima](https://github.com/cohama/lexima.vim) is great, but does not include any rules for web templates, so I wrote
+some. Then I figured other people might find them useful, so I pulled them out of my `init.vim` and here they are.
 
 #### Getting Started
 
