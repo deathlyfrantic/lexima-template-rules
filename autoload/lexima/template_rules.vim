@@ -36,21 +36,21 @@ function! lexima#template_rules#add_rules()
         \ 'leave': 1,
         \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig', 'mako', 'xml'],
         \ })
-	call lexima#add_rule({
-			\ 'char': '<BS>',
-			\ 'at': '<.*>\%#',
-			\ 'input': '<BS>',
-			\ 'input_after': '>',
-			\ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig', 'mako', 'xml'],
-			\ })
-	call lexima#add_rule({
-			\ 'char': '<BS>',
-			\ 'at': '<.*/>\%#',
-			\ 'input': '<BS><BS>',
-			\ 'input_after': '/>',
-			\ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig', 'mako', 'xml'],
-			\ 'priority': 1,
-			\ })
+  call lexima#add_rule({
+      \ 'char': '<BS>',
+      \ 'at': '<.*>\%#',
+      \ 'input': '<BS>',
+      \ 'input_after': '>',
+      \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig', 'mako', 'xml'],
+      \ })
+  call lexima#add_rule({
+      \ 'char': '<BS>',
+      \ 'at': '<.*/>\%#',
+      \ 'input': '<BS><BS>',
+      \ 'input_after': '/>',
+      \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig', 'mako', 'xml'],
+      \ 'priority': 1,
+      \ })
   call lexima#add_rule({
         \ 'char': '/',
         \ 'leave': 2,
@@ -176,6 +176,12 @@ function! lexima#template_rules#add_rules()
           \ 'filetype': c.filetypes
           \ })
     call lexima#add_rule({
+          \ 'char': '}',
+          \ 'at': '\%#'.c.char.'}',
+          \ 'leave': 2,
+          \ 'filetype': c.filetypes
+          \ })
+    call lexima#add_rule({
           \ 'char': c.char,
           \ 'at': '\%#-'.c.char.'}',
           \ 'leave': 3,
@@ -226,7 +232,19 @@ function! lexima#template_rules#add_rules()
           \ 'filetype': c.filetypes
           \ })
     call lexima#add_rule({
+          \ 'char': '}',
+          \ 'at': '\%# '.c.char.'}',
+          \ 'leave': 3,
+          \ 'filetype': c.filetypes
+          \ })
+    call lexima#add_rule({
           \ 'char': c.char,
+          \ 'at': '\%# -'.c.char.'}',
+          \ 'leave': 4,
+          \ 'filetype': c.filetypes
+          \ })
+    call lexima#add_rule({
+          \ 'char': '}',
           \ 'at': '\%# -'.c.char.'}',
           \ 'leave': 4,
           \ 'filetype': c.filetypes
