@@ -201,7 +201,7 @@ function! lexima#template_rules#add_rules()
           \ })
     call lexima#add_rule({
           \ 'char': '<BS>',
-          \ 'at': '{-'.c.char.' \%# -'.c.char.'}',
+          \ 'at': '{'.c.char.'- \%# -'.c.char.'}',
           \ 'delete': 1,
           \ 'filetype': c.filetypes
           \ })
