@@ -20,229 +20,312 @@
 " OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 function! lexima#template_rules#add_rules()
-    augroup lexima_template_rules
-        autocmd!
-    augroup END
+  augroup lexima_template_rules
+    autocmd!
+  augroup END
 
-    " basic html/xml tag delimiters {{{
-    call lexima#add_rule({
+  " basic html/xml tag delimiters {{{
+  call lexima#add_rule({
         \ 'char': '<',
         \ 'input_after': '>',
-        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako', 'xml'],
+        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig', 'mako', 'xml'],
         \ })
-    call lexima#add_rule({
+  call lexima#add_rule({
         \ 'char': '>',
         \ 'at': '\%#>',
         \ 'leave': 1,
-        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako', 'xml'],
+        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig', 'mako', 'xml'],
         \ })
     call lexima#add_rule({
         \ 'char': '<BS>',
         \ 'at': '<.*>\%#',
         \ 'input': '<BS>',
         \ 'input_after': '>',
-        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako', 'xml'],
+        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig', 'mako', 'xml'],
         \ })
     call lexima#add_rule({
         \ 'char': '<BS>',
         \ 'at': '<.*/>\%#',
         \ 'input': '<BS><BS>',
         \ 'input_after': '/>',
-        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako', 'xml'],
+        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig', 'mako', 'xml'],
         \ 'priority': 1,
         \ })
-    call lexima#add_rule({
+  call lexima#add_rule({
         \ 'char': '/',
         \ 'leave': 2,
         \ 'at': '^\s*<.*\%#\s*/>',
-        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako', 'xml'],
+        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig', 'mako', 'xml'],
         \ })
-    call lexima#add_rule({
+  call lexima#add_rule({
         \ 'char': '<BS>',
         \ 'delete': 1,
         \ 'at': '<\%#>',
-        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako', 'xml'],
+        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig', 'mako', 'xml'],
         \ })
-    call lexima#add_rule({
+  call lexima#add_rule({
         \ 'char': '<BS>',
         \ 'delete': 2,
         \ 'at': '<\%#/>',
-        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako', 'xml'],
+        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig', 'mako', 'xml'],
         \ 'priority': 1,
         \ })
-    call lexima#add_rule({
+  call lexima#add_rule({
         \ 'char': '/',
         \ 'delete': 1,
         \ 'input': '/>',
         \ 'at': '<[^>]\+\%#>',
-        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako', 'xml'],
+        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig', 'mako', 'xml'],
         \ })
-    call lexima#add_rule({
+  call lexima#add_rule({
         \ 'char': '<CR>',
         \ 'input': '<CR>',
         \ 'input_after': '<CR>',
         \ 'at': '>\%#</',
-        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'mako', 'xml'],
+        \ 'filetype': ['html', 'jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig', 'mako', 'xml'],
         \ })
-    " }}}
+  " }}}
 
-    " jinja/django/liquid/twig templates {{{
-    let s:chars = [
-        \ {'char': '%', 'filetypes': ['jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig',]},
-        \ {'char': '#', 'filetypes': ['jinja', 'htmljinja', 'django', 'htmldjango', 'twig',]},
+  " jinja/django/liquid/twig templates {{{
+  let s:chars = [
+        \ {'char': '%', 'filetypes': ['jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig',]},
+        \ {'char': '#', 'filetypes': ['jinja', 'htmljinja', 'django', 'htmldjango', 'twig', 'html.twig',]},
         \ ]
 
-    call lexima#add_rule({
+  call lexima#add_rule({
+        \ 'char': '-',
+        \ 'at': '{{\%#}}',
+        \ 'input_after': '-',
+        \ 'filetype': ['jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig',],
+        \ })
+  call lexima#add_rule({
+        \ 'char': '<Space>',
+        \ 'at': '{{-\%#-}}',
+        \ 'input_after': '<Space>',
+        \ 'filetype': ['jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig',],
+        \ })
+  call lexima#add_rule({
         \ 'char': '}',
         \ 'at': '\%#}}',
         \ 'leave': 2,
-        \ 'filetype': ['jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig',],
+        \ 'filetype': ['jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig',],
         \ })
-    call lexima#add_rule({
+  call lexima#add_rule({
+        \ 'char': '}',
+        \ 'at': '\%#-}}',
+        \ 'leave': 3,
+        \ 'filetype': ['jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig',],
+        \ })
+  call lexima#add_rule({
         \ 'char': '}',
         \ 'at': '\%# }}',
         \ 'leave': 3,
-        \ 'filetype': ['jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig',],
+        \ 'filetype': ['jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig',],
+        \ })
+  call lexima#add_rule({
+        \ 'char': '}',
+        \ 'at': '\%# -}}',
+        \ 'leave': 4,
+        \ 'filetype': ['jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig',],
         \ })
 
-    call lexima#add_rule({
+  call lexima#add_rule({
         \ 'char': '<BS>',
         \ 'at': '}}\%#',
         \ 'input': '<BS><BS><BS>',
         \ 'input_after': ' }}',
-        \ 'filetype': ['jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig',],
+        \ 'filetype': ['jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig',],
+        \ })
+  call lexima#add_rule({
+        \ 'char': '<BS>',
+        \ 'at': '-}}\%#',
+        \ 'input': '<BS><BS><BS><BS>',
+        \ 'input_after': ' -}}',
+        \ 'filetype': ['jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig',],
         \ })
 
-    for c in s:chars
-        call lexima#add_rule({
-            \ 'char': c.char,
-            \ 'at': '{\%#}',
-            \ 'input_after': c.char,
-            \ 'filetype': c.filetypes
-            \ })
-        call lexima#add_rule({
-            \ 'char': c.char,
-            \ 'at': '\%#'.c.char.'}',
-            \ 'leave': 2,
-            \ 'filetype': c.filetypes
-            \ })
-        call lexima#add_rule({
-            \ 'char': '<BS>',
-            \ 'at': '{'.c.char.'\%#'.c.char.'}',
-            \ 'delete': 1,
-            \ 'filetype': c.filetypes
-            \ })
-        call lexima#add_rule({
-            \ 'char': '<BS>',
-            \ 'at': '{'.c.char.' \%# '.c.char.'}',
-            \ 'delete': 1,
-            \ 'filetype': c.filetypes
-            \ })
-        call lexima#add_rule({
-            \ 'char': '<BS>',
-            \ 'at': ' '.c.char.'}\%#',
-            \ 'input': '<BS><BS><BS>',
-            \ 'input_after': ' '.c.char.'}',
-            \ 'filetype': c.filetypes
-            \ })
-        call lexima#add_rule({
-            \ 'char': c.char,
-            \ 'at': '\%# '.c.char.'}',
-            \ 'leave': 3,
-            \ 'filetype': c.filetypes
-            \ })
-        call lexima#add_rule({
-            \ 'char': '<Space>',
-            \ 'at': '{'.c.char.'\%#'.c.char.'}',
-            \ 'input': '<Space>',
-            \ 'input_after': '<Space>',
-            \ 'filetype': c.filetypes
-            \ })
-    endfor
+  for c in s:chars
+    call lexima#add_rule({
+          \ 'char': c.char,
+          \ 'at': '{\%#}',
+          \ 'input_after': c.char,
+          \ 'filetype': c.filetypes
+          \ })
+    call lexima#add_rule({
+          \ 'char': '-',
+          \ 'at': '{'.c.char.'\%#'.c.char.'}',
+          \ 'input_after': '-',
+          \ 'filetype': c.filetypes
+          \ })
+    call lexima#add_rule({
+          \ 'char': c.char,
+          \ 'at': '\%#'.c.char.'}',
+          \ 'leave': 2,
+          \ 'filetype': c.filetypes
+          \ })
+    call lexima#add_rule({
+          \ 'char': c.char,
+          \ 'at': '\%#-'.c.char.'}',
+          \ 'leave': 3,
+          \ 'filetype': c.filetypes
+          \ })
+    call lexima#add_rule({
+          \ 'char': '<BS>',
+          \ 'at': '{'.c.char.'\%#'.c.char.'}',
+          \ 'delete': 1,
+          \ 'filetype': c.filetypes
+          \ })
+    call lexima#add_rule({
+          \ 'char': '<BS>',
+          \ 'at': '{'.c.char.'-\%#-'.c.char.'}',
+          \ 'delete': 1,
+          \ 'filetype': c.filetypes
+          \ })
+    call lexima#add_rule({
+          \ 'char': '<BS>',
+          \ 'at': '{'.c.char.' \%# '.c.char.'}',
+          \ 'delete': 1,
+          \ 'filetype': c.filetypes
+          \ })
+    call lexima#add_rule({
+          \ 'char': '<BS>',
+          \ 'at': '{-'.c.char.' \%# -'.c.char.'}',
+          \ 'delete': 1,
+          \ 'filetype': c.filetypes
+          \ })
+    call lexima#add_rule({
+          \ 'char': '<BS>',
+          \ 'at': ' '.c.char.'}\%#',
+          \ 'input': '<BS><BS><BS>',
+          \ 'input_after': ' '.c.char.'}',
+          \ 'filetype': c.filetypes
+          \ })
+    call lexima#add_rule({
+          \ 'char': '<BS>',
+          \ 'at': ' -'.c.char.'}\%#',
+          \ 'input': '<BS><BS><BS><BS>',
+          \ 'input_after': ' -'.c.char.'}',
+          \ 'filetype': c.filetypes
+          \ })
+    call lexima#add_rule({
+          \ 'char': c.char,
+          \ 'at': '\%# '.c.char.'}',
+          \ 'leave': 3,
+          \ 'filetype': c.filetypes
+          \ })
+    call lexima#add_rule({
+          \ 'char': c.char,
+          \ 'at': '\%# -'.c.char.'}',
+          \ 'leave': 4,
+          \ 'filetype': c.filetypes
+          \ })
+    call lexima#add_rule({
+          \ 'char': '<Space>',
+          \ 'at': '{'.c.char.'\%#'.c.char.'}',
+          \ 'input': '<Space>',
+          \ 'input_after': '<Space>',
+          \ 'filetype': c.filetypes
+          \ })
+    call lexima#add_rule({
+          \ 'char': '<Space>',
+          \ 'at': '{'.c.char.'-\%#-'.c.char.'}',
+          \ 'input': '<Space>',
+          \ 'input_after': '<Space>',
+          \ 'filetype': c.filetypes
+          \ })
+  endfor
 
-    let s:template_tags = [
-        \ {'tag': 'autoescape', 'filetypes': ['jinja', 'htmljinja', 'django', 'htmldjango', 'twig',]},
-        \ {'tag': 'block'     , 'filetypes': ['jinja', 'htmljinja', 'django', 'htmldjango', 'twig',]},
+  let s:template_tags = [
+        \ {'tag': 'autoescape', 'filetypes': ['jinja', 'htmljinja', 'django', 'htmldjango', 'twig', 'html.twig',]},
+        \ {'tag': 'block'     , 'filetypes': ['jinja', 'htmljinja', 'django', 'htmldjango', 'twig', 'html.twig',]},
         \ {'tag': 'blocktrans', 'filetypes': ['django', 'htmldjango',]},
         \ {'tag': 'call'      , 'filetypes': ['jinja', 'htmljinja',]},
         \ {'tag': 'capture'   , 'filetypes': ['liquid',]},
         \ {'tag': 'case'      , 'filetypes': ['liquid',]},
         \ {'tag': 'comment'   , 'filetypes': ['django', 'htmldjango', 'liquid',]},
-        \ {'tag': 'embed'     , 'filetypes': ['twig',]},
-        \ {'tag': 'filter'    , 'filetypes': ['jinja', 'htmljinja', 'django', 'htmldjango', 'twig',]},
-        \ {'tag': 'for'       , 'filetypes': ['jinja', 'htmljinja', 'django', 'htmldjango', 'twig', 'liquid',]},
-        \ {'tag': 'if'        , 'filetypes': ['jinja', 'htmljinja', 'django', 'htmldjango', 'twig', 'liquid',]},
+        \ {'tag': 'embed'     , 'filetypes': ['twig', 'html.twig',]},
+        \ {'tag': 'filter'    , 'filetypes': ['jinja', 'htmljinja', 'django', 'htmldjango', 'twig', 'html.twig',]},
+        \ {'tag': 'for'       , 'filetypes': ['jinja', 'htmljinja', 'django', 'htmldjango', 'twig', 'html.twig', 'liquid',]},
+        \ {'tag': 'if'        , 'filetypes': ['jinja', 'htmljinja', 'django', 'htmldjango', 'twig', 'html.twig', 'liquid',]},
         \ {'tag': 'ifequal'   , 'filetypes': ['django', 'htmldjango',]},
         \ {'tag': 'ifnotequal', 'filetypes': ['django', 'htmldjango',]},
         \ {'tag': 'ifchanged' , 'filetypes': ['django', 'htmldjango',]},
-        \ {'tag': 'macro'     , 'filetypes': ['jinja', 'htmljinja', 'twig',]},
+        \ {'tag': 'macro'     , 'filetypes': ['jinja', 'htmljinja', 'twig', 'html.twig',]},
         \ {'tag': 'raw'       , 'filetypes': ['jinja', 'htmljinja', 'liquid',]},
-        \ {'tag': 'sandbox'   , 'filetypes': ['twig',]},
-        \ {'tag': 'spaceless' , 'filetypes': ['django', 'htmldjango', 'twig',]},
+        \ {'tag': 'sandbox'   , 'filetypes': ['twig', 'html.twig',]},
+        \ {'tag': 'spaceless' , 'filetypes': ['django', 'htmldjango', 'twig', 'html.twig',]},
         \ {'tag': 'tablerow'  , 'filetypes': ['liquid',]},
         \ {'tag': 'trans'     , 'filetypes': ['jinja', 'htmljinja',]},
         \ {'tag': 'unless'    , 'filetypes': ['liquid',]},
-        \ {'tag': 'verbatim'  , 'filetypes': ['django', 'htmldjango', 'twig',]},
+        \ {'tag': 'verbatim'  , 'filetypes': ['django', 'htmldjango', 'twig', 'html.twig',]},
         \ {'tag': 'with'      , 'filetypes': ['jinja', 'htmljinja', 'django', 'htmldjango',]},
         \ ]
 
-    if g:lexima_template_rules_endset
-        let s:template_tags = add(s:template_tags, {'tag': 'set', 'filetypes': ['jinja', 'htmljinja', 'twig',]})
-    endif
+  if g:lexima_template_rules_endset
+    let s:template_tags = add(s:template_tags, {'tag': 'set', 'filetypes': ['jinja', 'htmljinja', 'twig', 'html.twig',]})
+  endif
 
-    for t in s:template_tags
-        call lexima#add_rule({
-            \ 'char': '<CR>',
-            \ 'input': '<CR>',
-            \ 'input_after': '<CR>{% end'.t.tag.' %}',
-            \ 'except': '\C\v^(\s*)\S.*%#\n%(%(\s*|\1\s.+)\n)*\1.*end'.t.tag,
-            \ 'at': '^\s*{%\s*\%('.t.tag.'\).*%}\%#',
-            \ 'filetype': t.filetypes,
-            \ })
-    endfor
-    " }}}
-
-    " mako {{{
-    for mt in ['def', 'block', 'doc', 'text', 'call',]
-        call lexima#add_rule({
-            \ 'char': '<CR>',
-            \ 'input': '<CR>',
-            \ 'input_after': '<CR></%'.mt.'>',
-            \ 'except': '\C\v^(\s*)\S.*%#\n%(%(\s*|\1\s.+)\n)*\1.*\</\%'.mt,
-            \ 'at': '^\s*<%'.mt.'.*>\%#',
-            \ 'filetype': 'mako',
-            \ })
-    endfor
-
-    for mt in ['if', 'for',]
-        call lexima#add_rule({
-            \ 'char': '<CR>',
-            \ 'input': '<CR>',
-            \ 'input_after': '<CR>% end'.mt,
-            \ 'except': '\C\v^(\s*)\S.*%#\n%(%(\s*|\1\s.+)\n)*\1.*\% end'.mt,
-            \ 'at': '^\s*% '.mt.'.*\%#',
-            \ 'filetype': 'mako',
-            \ })
-    endfor
-
-    for mt in ['page', 'include', 'namespace', 'inherit',]
-        let ll = mt[-1:]
-        let bc = mt[:-2]
-        call lexima#add_rule({
-            \ 'char': ll,
-            \ 'input_after': '/',
-            \ 'at': '^\s*<%'.bc.'\%#',
-            \ 'filetype': 'mako',
-            \ })
-        call lexima#add_rule({
-            \ 'char': '<BS>',
-            \ 'delete': 1,
-            \ 'at': '^\s*<%'.mt.'\%#/>',
-            \ 'filetype': 'mako',
-            \ })
-    endfor
-
+  for t in s:template_tags
     call lexima#add_rule({
+          \ 'char': '<CR>',
+          \ 'input': '<CR>',
+          \ 'input_after': '<CR>{% end'.t.tag.' %}',
+          \ 'except': '\C\v^(\s*)\S.*%#\n%(%(\s*|\1\s.+)\n)*\1.*end'.t.tag,
+          \ 'at': '^\s*{%\s*\%('.t.tag.'\).*%}\%#',
+          \ 'filetype': t.filetypes,
+          \ })
+    call lexima#add_rule({
+          \ 'char': '<CR>',
+          \ 'input': '<CR>',
+          \ 'input_after': '<CR>{%- end'.t.tag.' -%}',
+          \ 'except': '\C\v^(\s*)\S.*%#\n%(%(\s*|\1\s.+)\n)*\1.*end'.t.tag,
+          \ 'at': '^\s*{%-\s*\%('.t.tag.'\).*-%}\%#',
+          \ 'filetype': t.filetypes,
+          \ })
+  endfor
+  " }}}
+
+  " mako {{{
+  for mt in ['def', 'block', 'doc', 'text', 'call',]
+    call lexima#add_rule({
+          \ 'char': '<CR>',
+          \ 'input': '<CR>',
+          \ 'input_after': '<CR></%'.mt.'>',
+          \ 'except': '\C\v^(\s*)\S.*%#\n%(%(\s*|\1\s.+)\n)*\1.*\</\%'.mt,
+          \ 'at': '^\s*<%'.mt.'.*>\%#',
+          \ 'filetype': 'mako',
+          \ })
+  endfor
+
+  for mt in ['if', 'for',]
+    call lexima#add_rule({
+          \ 'char': '<CR>',
+          \ 'input': '<CR>',
+          \ 'input_after': '<CR>% end'.mt,
+          \ 'except': '\C\v^(\s*)\S.*%#\n%(%(\s*|\1\s.+)\n)*\1.*\% end'.mt,
+          \ 'at': '^\s*% '.mt.'.*\%#',
+          \ 'filetype': 'mako',
+          \ })
+  endfor
+
+  for mt in ['page', 'include', 'namespace', 'inherit',]
+    let ll = mt[-1:]
+    let bc = mt[:-2]
+    call lexima#add_rule({
+          \ 'char': ll,
+          \ 'input_after': '/',
+          \ 'at': '^\s*<%'.bc.'\%#',
+          \ 'filetype': 'mako',
+          \ })
+    call lexima#add_rule({
+          \ 'char': '<BS>',
+          \ 'delete': 1,
+          \ 'at': '^\s*<%'.mt.'\%#/>',
+          \ 'filetype': 'mako',
+          \ })
+  endfor
+
+  call lexima#add_rule({
         \ 'char': '<CR>',
         \ 'input': '<CR>',
         \ 'input_after': '<CR>%',
@@ -250,6 +333,6 @@ function! lexima#template_rules#add_rules()
         \ 'at': '^\s*<%!*\%#>',
         \ 'filetype': 'mako',
         \ })
-    " }}}
+  " }}}
 endfunction
 " vim: fdm=marker
