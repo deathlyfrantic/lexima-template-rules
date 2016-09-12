@@ -143,6 +143,18 @@ function! lexima#template_rules#add_rules()
         \ 'input_after': ' -}}',
         \ 'filetype': ['jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig',],
         \ })
+  call lexima#add_rule({
+        \ 'char': '<BS>',
+        \ 'at': '{{- \%# -}}',
+        \ 'delete': 1,
+        \ 'filetype': c.filetypes
+        \ })
+  call lexima#add_rule({
+        \ 'char': '<BS>',
+        \ 'at': '{{-\%#-}}',
+        \ 'delete': 1,
+        \ 'filetype': c.filetypes
+        \ })
 
   for c in s:chars
     call lexima#add_rule({
