@@ -147,13 +147,13 @@ function! lexima#template_rules#add_rules()
         \ 'char': '<BS>',
         \ 'at': '{{- \%# -}}',
         \ 'delete': 1,
-        \ 'filetype': c.filetypes
+        \ 'filetype': ['jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig',],
         \ })
   call lexima#add_rule({
         \ 'char': '<BS>',
         \ 'at': '{{-\%#-}}',
         \ 'delete': 1,
-        \ 'filetype': c.filetypes
+        \ 'filetype': ['jinja', 'htmljinja', 'django', 'htmldjango', 'liquid', 'twig', 'html.twig',],
         \ })
 
   for c in s:chars
