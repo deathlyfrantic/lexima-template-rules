@@ -1,3 +1,5 @@
+![PRs welcome but not actively maintained](https://img.shields.io/badge/status-PRs%20welcome%20but%20not%20actively%20maintained-red.svg?style=flat-square)
+
 ## Lexima Rules for Web Templates
 
 [Lexima](https://github.com/cohama/lexima.vim) is great, but does not include any rules for web templates, so I wrote
