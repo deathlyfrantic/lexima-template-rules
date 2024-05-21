@@ -46,6 +46,8 @@ let s:filetypes = [
     \ 'html',
     \ 'htmldjango',
     \ 'htmljinja',
+    \ 'javascriptreact',
+    \ 'typescriptreact',
     \ 'jinja',
     \ 'liquid',
     \ 'mako',
